@@ -52,8 +52,7 @@ Métodos CRUD da APIA API oferece os seguintes endpoints:- GET /oculos - Retorna
 Renderização de Páginas HTMLAlém da API, o projeto inclui páginas HTML para exibição e gerenciamento de dados usando Jinja2:- GET / - Página inicial.
 - GET /oculos - Exibe a lista de óculos disponíveis.
 - GET /oculos/<id> - Exibe detalhes de um óculos.
-Exemplo de Consulta SQLSELECT o.Nome, o.Cor, o.Valor, m.Nome AS Marca
-FROM projeto_otica_oculos o
-JOIN projeto_otica_marca m ON o.ID_Marca = m.ID_Marca
-WHERE o.Valor > 300.00;
-Essa consulta retorna todos os óculos com valor superior a R$ 300, mostrando suas cores e marcas.ContribuiçõesSe desejar melhorar ou expandir este projeto, fique à vontade para sugerir alterações
+
+Observação
+📌 A API está disponível na branch master deste repositório. Certifique-se de estar nesta branch ao clonar o projeto.
+
