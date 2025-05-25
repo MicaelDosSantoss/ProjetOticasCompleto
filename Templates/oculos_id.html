@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ oculos_id['Nome'] }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Roboto Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <!-- Card do Produto -->
+    <div class="bg-white rounded-xl shadow-lg p-6 max-w-sm text-center">
+        <h2 class="text-xl font-bold uppercase mb-4">{{ oculos_id['Nome'] }}</h2>
+
+        {% if oculos_id['Imagem'] %}
+        <img
+            src="{{ url_for('static', filename='uploads/' + oculos_id['Imagem']) }}"
+            alt="{{ oculos_id['Nome'] }}"
+            class="cursor-pointer rounded-lg hover:scale-105 transition"
+            onclick="openModal()"
+        />
+        {% else %}
+        <div class="bg-gray-300 w-full h-48 flex items-center justify-center rounded mb-4">Sem imagem</div>
+        {% endif %}
+
+        <p class="text-gray-700 mt-4">Clique na imagem para mais detalhes</p>
+    </div>
+
+    <!-- Modal de Detalhes -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-2xl">&times;</button>
+
+            <h3 class="text-2xl font-bold mb-2">{{ oculos_id['Nome'] }}</h3>
+            <p class="text-sm text-gray-500 mb-2">Código: {{ oculos_id['ID_Oculos'] }}</p>
+
+            {% if oculos_id['Imagem'] %}
+            <img src="{{ url_for('static', filename='uploads/' + oculos_id['Imagem']) }}" alt="{{ oculos_id['Nome'] }}" class="rounded mb-4" />
+            {% endif %}
+
+            <ul class="text-left mb-4 text-sm text-gray-600 space-y-1">
+                <li><strong>Cor:</strong> {{ oculos_id['Cor'] }}</li>
+                <li><strong>Tamanho:</strong> {{ oculos_id['Tamanho'] }}</li>
+                <li><strong>Gênero:</strong> {{ oculos_id['Genero'] }}</li>
+                <li><strong>Material:</strong> {{ oculos_id['ID_Material'] }}</li>
+                <li><strong>Marca:</strong> {{ oculos_id['ID_Marca'] }}</li>
+                <li><strong>Forma:</strong> {{ oculos_id['ID_Forma'] }}</li>
+                <li><strong>Recebido em:</strong> {{ oculos_id['Data_Recebimento'] }}</li>
+            </ul>
+
+            <p class="text-lg font-semibold mb-4">Preço: R$ {{oculos_id['Valor']}}0</p>
+
+            <a href="/{{ oculos_id['ID_Oculos'] }}/pag">
+                <button class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">Ir para pagamento</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        function openModal() {
+            document.getElementById("modal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("modal").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>

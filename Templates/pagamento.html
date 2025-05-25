@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagamento</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Pagamento</h2>
+
+    <form class="space-y-4" method="POST" action="/vendas">
+      <!-- Nome no Cartão -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Nome no Cartão</label>
+        <input name="Nome_Cartao" type="text" placeholder="Nome completo" required class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <!-- Número do Cartão -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Número do Cartão</label>
+        <input name="Numero_Cartao" type="text" placeholder="0000 0000 0000 0000" required class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <!-- Validade e CVV -->
+      <div class="flex gap-4">
+        <div class="flex-1">
+          <label class="block text-sm font-medium mb-1">Validade</label>
+          <input name="validade" type="text" placeholder="MM/AA" class="w-full border rounded px-3 py-2" />
+        </div>
+        <div class="flex-1">
+          <label class="block text-sm font-medium mb-1">CVV</label>
+          <input name="cvv" type="text" placeholder="123" class="w-full border rounded px-3 py-2" />
+        </div>
+      </div>
+
+      <!-- Endereço de entrega -->
+      <div>
+        <label class="block text-sm font-medium mb-1">CEP</label>
+        <input name="CEP" type="text" placeholder="00000-000" required class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Endereço</label>
+        <input name="Endereco" type="text" placeholder="Rua Exemplo, 123" required class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Cidade</label>
+        <input name="Cidade" type="text" placeholder="São Paulo" required class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Estado</label>
+        <input name="Estado" type="text" maxlength="2" placeholder="SP" required class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Complemento</label>
+        <input name="Complemento" type="text" placeholder="Apto, Bloco, etc." class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <!-- ID do Óculos (oculto) -->
+      <input type="hidden" name="ID_Oculos" id="id-oculos" />
+
+      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+        Confirmar Pagamento
+      </button>
+    </form>
+  </div>
+
+  <!-- Script para capturar ID da URL -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const pathParts = window.location.pathname.split("/");
+      const id = pathParts[1]; // ex: /<id>/pag
+      document.getElementById("id-oculos").value = id;
+    });
+  </script>
+</body>
+</html>
