@@ -1,0 +1,45 @@
+CREATE TABLE material (
+    ID_Material VARCHAR(36) PRIMARY KEY,
+    Nome VARCHAR(100)
+);
+
+CREATE TABLE marca (
+    ID_Marca VARCHAR(36) PRIMARY KEY,
+    Nome VARCHAR(100)
+);
+
+CREATE TABLE forma (
+    ID_Forma VARCHAR(36) PRIMARY KEY,
+    Nome VARCHAR(100)
+);
+
+CREATE TABLE oculos (
+    ID_Oculos VARCHAR(36) PRIMARY KEY,
+    Nome VARCHAR(100),
+    ID_Material VARCHAR(36),
+    Cor VARCHAR(50),
+    Tamanho VARCHAR(20),
+    ID_Marca VARCHAR(36),
+    Genero VARCHAR(50),
+    ID_Forma VARCHAR(36),
+    Valor DECIMAL(10,2),
+    Data_Recebimento DATE,
+    Imagem VARCHAR(255),
+    FOREIGN KEY (ID_Material) REFERENCES material(ID_Material),
+    FOREIGN KEY (ID_Marca) REFERENCES marca(ID_Marca),
+    FOREIGN KEY (ID_Forma) REFERENCES forma(ID_Forma)
+);
+
+CREATE TABLE vendas (
+    ID_Venda CHAR(36) PRIMARY KEY,
+    ID_Oculos VARCHAR(36),
+    Nome_Cartao VARCHAR(100),
+    Numero_Cartao VARCHAR(20),
+    CEP VARCHAR(9),
+    Endereco VARCHAR(255),
+    Cidade VARCHAR(100),
+    Estado VARCHAR(2),
+    Complemento VARCHAR(100),
+    Data_Venda DATETIME,
+    FOREIGN KEY (ID_Oculos) REFERENCES oculos(ID_Oculos)
+);
